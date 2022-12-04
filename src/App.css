@@ -1,12 +1,17 @@
-.form
-{
+body {
+  background-color: azure;
+}
+
+
+
+.form {
   margin: auto;
   width: 50vw;
-  border: 3px solid antiquewhite;
+  border: 3px solid gainsboro;
   padding: 10px;
-
 }
-#Header
-{
+
+
+#Header {
   text-align: center;
 }

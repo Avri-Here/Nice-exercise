@@ -92,6 +92,13 @@ export default function ListOfWorkers(props) {
       </div>
     );
   } else {
-    <h2>No employees have been added yet, add now..</h2>;
+    return (
+      <>
+        <hr />
+        <h3 style={{textAlign:"center"}}>
+          No employees have been added yet .. <br /> add now..
+        </h3>
+      </>
+    );
   }
 }
