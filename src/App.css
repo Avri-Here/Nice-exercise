@@ -2,16 +2,18 @@ body {
   background-color: azure;
 }
 
-
-
 .form {
   margin: auto;
   width: 50vw;
-  border: 3px solid gainsboro;
+  /* border: 1px solid gainsboro; */
   padding: 10px;
 }
 
-
 #Header {
   text-align: center;
+}
+
+#btnSend {
+  margin-top: 1.5vw;
+  margin-left: 1vw;
 }

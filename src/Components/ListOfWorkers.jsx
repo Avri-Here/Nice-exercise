@@ -5,6 +5,7 @@ import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import ButtonBase from "@material-ui/core/ButtonBase";
 import DeleteIcon from "@material-ui/icons/Delete";
+import FilterByType from "./FilterByType";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -26,19 +27,24 @@ const useStyles = makeStyles((theme) => ({
     maxHeight: "100%",
   },
 }));
+
 export default function ListOfWorkers(props) {
   const classes = useStyles();
 
   function removeFromArr(index) {
+    // To delete without holes from an array you can use a "Array.prototype.splice()" , in case the array is a State it is better to use a filter prototype ..
+
     const newArrAfterFilter = props.arrWorker.filter((item, ind) => {
       return ind !== index;
     });
+    // Update the array after deleting an item ..
     props.setArrWorker(newArrAfterFilter);
   }
 
   if (props.arrWorker.length > 0) {
     return (
       <div className={classes.root}>
+        <FilterByType setArrWorker={props.setArrWorker} arrWorker={props.arrWorker} />
         {props.arrWorker.map((item, index) => {
           return (
             <div key={item.photoUser}>
@@ -94,9 +100,10 @@ export default function ListOfWorkers(props) {
   } else {
     return (
       <>
+        <br />
         <hr />
-        <h3 style={{textAlign:"center"}}>
-          No employees have been added yet .. <br /> add now..
+        <h3 style={{ textAlign: "center", fontFamily: "system-ui" }}>
+          No employees have been added yet ..
         </h3>
       </>
     );
