@@ -23,7 +23,7 @@ export default function FilterBySearch(props) {
             // There are no search results if the existing array (state) and the temporary array point to the same place and reset the counter (counterSearch)..
 
             searchResults === props.arrWorker
-              ? setcounterSearch(0)
+              ? setcounterSearch("0")
               : setcounterSearch(searchResults.length);
 
             // Actions when exiting the input ..

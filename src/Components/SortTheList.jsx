@@ -19,8 +19,10 @@ export default function SortTheList(props) {
 
   return (
     <div>
-      <Button
+      <Button 
         aria-controls="simple-menu"
+        color="success"
+        variant="contained"
         aria-haspopup="true"
         onClick={handleClick}
       >
