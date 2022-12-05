@@ -10,7 +10,9 @@ import Button from "@material-ui/core/Button";
 import SaveIcon from "@material-ui/icons/Save";
 import Swal from "sweetalert2";
 import { useState, useEffect } from "react";
-import GetRandomPicture from "./Util/GetRandomPicture";
+
+import manageStateFunctions from "../Utils/ManageStateFunctions";
+import getRandomPicture from "../Utils/GetRandomPicture";
 
 const useStyles = makeStyles((theme) => ({
   margin: {
@@ -20,14 +22,6 @@ const useStyles = makeStyles((theme) => ({
 
 export default function FormInput(props) {
   const classes = useStyles();
-
-  // Keep the data in session storage for search input .. 
-  useEffect(() => {
-
-    sessionStorage.setItem("tempArrUsers", JSON.stringify(props.arrWorker));
-
-  }, [props.arrWorker]);
-
 
   // Object for fields : name, age, ID ..
   const [inputs, setInputs] = useState({});
@@ -41,31 +35,37 @@ export default function FormInput(props) {
 
   async function addToWorkerList(event) {
     event.preventDefault();
+
     // Get a random picture for worker and push the key into the object State ..
-    inputs.photoUser = await GetRandomPicture();
-    // Duplication of the same ID in Array ? ..
-    const duplication = props.arrWorker.every((item, index) => {
-      return item.Id !== inputs.Id;
-    });
+    inputs.photoUser = await getRandomPicture();
+
+    // Checking if a similar ID already exists ? ..
+    const duplication = manageStateFunctions.checkForDuplicates(
+      props.arrWorker,
+      inputs
+    );
+    // if exists Swal error ..
     if (!duplication) {
-      // error ..
       Swal.fire({
         icon: "error",
         title: "Oops...",
         text: "Something went wrong wite ID input !",
         footer: "<h6>Duplication ID .. </h6>",
       });
-      setInputs({});
     } else {
       // Update the Array workers ..
-      props.setArrWorker((oldArray) => [...oldArray, inputs]);
+      props.pushToArrWorker(inputs);
+
+      // Keep the data in session storage for search input ..
+      props.setRefresh((pre) => !pre);
     }
 
+    // Reset the input fields ..
     setInputs({});
   }
   return (
     <>
-      <form className="form" onSubmit={addToWorkerList}>
+      <form className="form" onSubmit={addToWorkerList} data-testid="form">
         <FormControl className={classes.margin}>
           <Grid container spacing={1} alignItems="flex-end">
             <Grid item>

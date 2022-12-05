@@ -4,7 +4,8 @@ export default (() => {
             const photoUser = await fetch("https://picsum.photos/200");
             resolve(photoUser.url);
         } catch (error) {
-            reject(error);
+            // Default image Url.. 
+            resolve("https://cdn-icons-png.flaticon.com/512/149/149071.png");
         }
     })
 })
