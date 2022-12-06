@@ -12,15 +12,16 @@ export default function FilterBySearch(props) {
         <input
           type="text"
           onChange={(e) => {
-            // Search the array by parameters ..
+            // Search in array by parameters ..
             const searchResults = manageStateFunctions.filterBySearchParams(
               props.arrWorker,
               e.target.value
             );
+
             // Edit an array ..
             props.setArrWorker(searchResults);
 
-            // There are no search results if the existing array (state) and the temporary array point to the same place and reset the counter (counterSearch)..
+            // There are no search results if the existing array (state) and the temporary array point to the same place and set the counter to "0" (counterSearch)..
 
             searchResults === props.arrWorker
               ? setcounterSearch("0")
@@ -30,6 +31,9 @@ export default function FilterBySearch(props) {
 
             if (!e.target.value) {
               setcounterSearch(0);
+
+              // Restore the original array before the change ..
+              
               props.setArrWorker(
                 JSON.parse(sessionStorage.getItem("tempArrUsers"))
               );

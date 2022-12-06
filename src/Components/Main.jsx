@@ -9,7 +9,7 @@ function Main() {
   const [refresh, setRefresh] = useState(false);
 
   useEffect(() => {
-    // Keep the data in session storage for various actions such as saving the array before changes and more.. ..
+    // Keep the data in session storage for various actions such as saving the array before changes and more..
     sessionStorage.setItem("tempArrUsers", JSON.stringify(arrWorker));
   }, [refresh]);
 

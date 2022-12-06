@@ -9,7 +9,7 @@ import AdbIcon from "@material-ui/icons/Adb";
 import Button from "@material-ui/core/Button";
 import SaveIcon from "@material-ui/icons/Save";
 import Swal from "sweetalert2";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 import manageStateFunctions from "../Utils/ManageStateFunctions";
 import getRandomPicture from "../Utils/GetRandomPicture";
@@ -36,7 +36,7 @@ export default function FormInput(props) {
   async function addToWorkerList(event) {
     event.preventDefault();
 
-    // Get a random picture for worker and push the key into the object State ..
+    // Get a random picture for worker and add the url into the object State ..
     inputs.photoUser = await getRandomPicture();
 
     // Checking if a similar ID already exists ? ..

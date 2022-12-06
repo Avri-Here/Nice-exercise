@@ -14,8 +14,8 @@ export default function ListOfWorkers(props) {
   const classes = useStyles();
 
   function removeFromArr(index) {
-    // To delete without holes from an array I can use a "Array.prototype.splice()" , in case the array is a State it is better to use a filter prototype ..
 
+    // To delete without holes from an array I can use a "Array.prototype.splice()" , in case the array is a State it is better to use a filter prototype ..
     const newArrAfterFilter = manageStateFunctions.newArrAfterRemove(
       props.arrWorker,
       index
@@ -27,7 +27,7 @@ export default function ListOfWorkers(props) {
     // Keep the data in session storage for search input ..
     props.setRefresh((pre) => !pre);
   }
-
+  
   if (props.arrWorker.length > 0) {
     return (
       <>
