@@ -1,4 +1,8 @@
+
+// The following methods are for state management ..
+
 export default {
+    
     checkForDuplicates: (arrWorker, inputs) => {
         return arrWorker.every((item) => {
             return item.Id !== inputs.Id;
