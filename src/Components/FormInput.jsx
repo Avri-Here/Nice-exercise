@@ -40,24 +40,22 @@ export default function FormInput(props) {
     inputs.photoUser = await getRandomPicture();
 
     // Checking if a similar ID already exists ? ..
-    const duplication = manageStateFunctions.checkForDuplicates(
+    const uniqueId = manageStateFunctions.checkForDuplicates(
       props.arrWorker,
       inputs
     );
     // if exists Swal error ..
-    if (!duplication) {
+    if (!uniqueId) {
       Swal.fire({
         icon: "error",
         title: "Oops...",
         text: "Something went wrong wite ID input !",
         footer: "<h6>Duplication ID .. </h6>",
       });
-    } else {
+    }
+     else {
       // Update the Array workers ..
-      props.pushToArrWorker(inputs);
-
-      // Keep the data in session storage for search input ..
-      props.setRefresh((pre) => !pre);
+      props.saveArrWorker([...props.arrWorker, inputs]);
     }
 
     // Reset the input fields ..
@@ -134,3 +132,5 @@ export default function FormInput(props) {
     </>
   );
 }
+
+// propTypes React..

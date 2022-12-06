@@ -3,7 +3,6 @@ import Button from "@material-ui/core/Button";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 
-import manageStateFunctions from "../Utils/ManageStateFunctions";
 export default function SortTheList(props) {
   const [anchorEl, setAnchorEl] = React.useState(null);
 
@@ -12,15 +11,9 @@ export default function SortTheList(props) {
     setAnchorEl(event.currentTarget);
   };
 
-  const handleClose = (sortBy) => {
+  // Methods of material-ui ..
+  const handleClose = () => {
     setAnchorEl(null);
-
-    // Sort the array by name || age ..
-    props.setArrWorker(manageStateFunctions.SortArray(props.arrWorker, sortBy));
-
-    // Save the sort after rendering in sessionStorage storage ..
-
-    props.setRefresh((pre) => !pre);
   };
 
   return (
@@ -43,17 +36,27 @@ export default function SortTheList(props) {
       >
         <MenuItem
           onClick={() => {
-            handleClose("Name");
+            props.setFilterBy({ run: "Name" });
+            handleClose();
           }}
         >
           Sort by name A-Z ..
         </MenuItem>
         <MenuItem
           onClick={() => {
-            handleClose("Age");
+            props.setFilterBy({ run: "Age" });
+            handleClose();
           }}
         >
           Sort by age ..
+        </MenuItem>
+        <MenuItem
+          onClick={() => {
+            props.setFilterBy({ run: "default" });
+            handleClose();
+          }}
+        >
+          filter By default ..
         </MenuItem>
       </Menu>
     </div>

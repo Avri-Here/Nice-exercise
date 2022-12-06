@@ -2,7 +2,7 @@
 // The following methods are for state management ..
 
 export default {
-    
+
     checkForDuplicates: (arrWorker, inputs) => {
         return arrWorker.every((item) => {
             return item.Id !== inputs.Id;
@@ -27,19 +27,31 @@ export default {
         return filterArr.length === 0 ? arrWorker : filterArr;
 
     },
-    SortArray: (arrWorker, sortBy) => {
+    SortArray: (arrWorker, sortOrSearch, optional) => {
 
         // Array sorting methods operate on the original array and do not return a new array, (like prototype.filter for example), that's why I used a deep copy to the array and then perform actions..
-        switch (sortBy) {
+        switch (sortOrSearch) {
             case "Age":
                 // Spread syntax ..
                 const sortByAge = [...arrWorker];
-                return sortByAge.sort((a, b) => b[sortBy] - a[sortBy]);
+                return sortByAge.sort((a, b) => b[sortOrSearch] - a[sortOrSearch]);
+
 
             case "Name":
                 // Spread syntax ..
                 const sortByName = [...arrWorker];
                 return sortByName.sort((a, b) => a.Name.localeCompare(b.Name));
+
+
+            case "SearchIn":
+                const filterArr = arrWorker.filter((item) => {
+                    let testStringArr = item.Name.toLowerCase();
+                    let testStringParams = optional.toLowerCase();
+                    return testStringArr.startsWith(testStringParams);
+                });
+
+                // If there are no matches for the search, return pointer to the original array unchanged ..
+                return filterArr.length === 0 ? arrWorker : filterArr;
 
             default:
                 return arrWorker;
