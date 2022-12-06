@@ -2,6 +2,18 @@
 
 Hey.. Welcome to Homework for NICE company..
 
+See screenshots of this project .. 
+https://github.com/Avri-Here/Nice-exercise../wiki
+
+
+
+
+
+
+
+
+
+
 ## Available Scripts
 
 In My project directory, you can run .. 
