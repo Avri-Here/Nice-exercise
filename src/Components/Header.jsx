@@ -6,7 +6,7 @@ export default function Header() {
       <br />
       <h2 style={{ textShadow: "1px 1px 0 #444", fontFamily: "cursive" }}>Welcome to Avery's project..</h2>
       <br />
-      <h3 style={{ textShadow: "1px 1px 0 #444" }}>Add a new worker ..</h3>
+      <h3>Add a new worker ..</h3>
       <br />
     </div>
   );

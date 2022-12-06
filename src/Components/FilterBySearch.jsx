@@ -5,12 +5,25 @@ import manageStateFunctions from "../Utils/ManageStateFunctions";
 export default function FilterBySearch(props) {
   // Number search results in screen..
   const [counterSearch, setcounterSearch] = useState(0);
+
   return (
     <>
       <label style={{ textAlign: "center", display: "grid" }}>
         Search for employees by name :
         <input
           type="text"
+          style={{ width: "22vw", marginTop: "1vw" }}
+
+          
+          // During a delete operation look for optional omitted results ..
+          onKeyDown={(event) => {
+            if (event.key === "Backspace") {
+              props.setArrWorker(
+                JSON.parse(sessionStorage.getItem("tempArrUsers"))
+              );
+            }
+          }}
+
           onChange={(e) => {
             // Search in array by parameters ..
             const searchResults = manageStateFunctions.filterBySearchParams(
@@ -18,14 +31,20 @@ export default function FilterBySearch(props) {
               e.target.value
             );
 
-            // Edit an array ..
-            props.setArrWorker(searchResults);
+            // There are no search results if the existing array (state) and the temporary array point to the same place and set the counterSearch to String : "0 , Try Again .." ..
 
-            // There are no search results if the existing array (state) and the temporary array point to the same place and set the counter to "0" (counterSearch)..
+            if (searchResults === props.arrWorker) {
+              setcounterSearch("0 , Try Again ..");
 
-            searchResults === props.arrWorker
-              ? setcounterSearch("0")
-              : setcounterSearch(searchResults.length);
+              props.setArrWorker(
+                JSON.parse(sessionStorage.getItem("tempArrUsers"))
+              );
+            } else {
+              // Edit an array & searchResults ..
+
+              setcounterSearch(searchResults.length);
+              props.setArrWorker(searchResults);
+            }
 
             // Actions when exiting the input ..
 
@@ -33,7 +52,7 @@ export default function FilterBySearch(props) {
               setcounterSearch(0);
 
               // Restore the original array before the change ..
-              
+
               props.setArrWorker(
                 JSON.parse(sessionStorage.getItem("tempArrUsers"))
               );

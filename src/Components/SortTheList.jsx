@@ -7,7 +7,7 @@ import manageStateFunctions from "../Utils/ManageStateFunctions";
 export default function SortTheList(props) {
   const [anchorEl, setAnchorEl] = React.useState(null);
 
-  // Methods of material-ui .. 
+  // Methods of material-ui ..
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -19,20 +19,20 @@ export default function SortTheList(props) {
     props.setArrWorker(manageStateFunctions.SortArray(props.arrWorker, sortBy));
 
     // Save the sort after rendering in sessionStorage storage ..
-    
+
     props.setRefresh((pre) => !pre);
   };
 
   return (
     <div>
-      <Button 
+      <Button
         aria-controls="simple-menu"
-        color="success"
+        color="primary"
         variant="contained"
         aria-haspopup="true"
         onClick={handleClick}
       >
-        Sort by :
+        Sort by
       </Button>
       <Menu
         id="simple-menu"
