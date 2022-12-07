@@ -9,9 +9,9 @@ test('getRandomPicture', async () => {
 
 
 test('checkForDuplicates', () => {
-    const test1 = ManageStateFunctions.checkForDuplicates([{ Id: 1 }, { Id: 2 }, { Id: 3 }], { Id: 6 });
+    const test1 = ManageStateFunctions.checkForDuplicates([{ id: 1 }, { id: 2 }, { id: 3 }], { id: 6 });
     expect(test1).toBe(true);
-    const test2 = ManageStateFunctions.checkForDuplicates([{ Id: 1 }, { Id: 2 }, { Id: 3 }], { Id: 3 });
+    const test2 = ManageStateFunctions.checkForDuplicates([{ id: 1 }, { id: 2 }, { id: 3 }], { id: 3 });
     expect(test2).toBe(false);
 });
 
@@ -26,17 +26,17 @@ test('newArrAfterRemove', () => {
 
 
 
-test('SortArray', () => {
-    const sortByName = ManageStateFunctions.SortArray([{ Name: "Avi" }, { Name: "Moy" }, { Name: "RONI" }, { Name: "ALY" }], "Name");
-    expect(sortByName).toStrictEqual([{ Name: "ALY" }, { Name: "Avi" }, { Name: "Moy" }, { Name: "RONI" }]);
+test('filterOrsort', () => {
+    const sortByName = ManageStateFunctions.filterOrsort([{ name: "Avi" }, { name: "Moy" }, { name: "RONI" }, { name: "ALY" }], "sort", "name");
+    expect(sortByName).toStrictEqual([{ name: "ALY" }, { name: "Avi" }, { name: "Moy" }, { name: "RONI" }]);
 
-    const sortByAge = ManageStateFunctions.SortArray([{ Age: 4 }, { Age: 8 }, { Age: 9 }, { Age: 1 }], "Age");
-    expect(sortByAge).toStrictEqual([{ Age: 9 }, { Age: 8 }, { Age: 4 }, { Age: 1 }]);
+    const sortByAge = ManageStateFunctions.filterOrsort([{ age: 4 }, { age: 8 }, { age: 9 }, { age: 1 }], "sort", "age");
+    expect(sortByAge).toStrictEqual([{ age: 9 }, { age: 8 }, { age: 4 }, { age: 1 }]);
 
-    const defaultArr = ManageStateFunctions.SortArray([{ Name: "Avi" }, { Name: "Moy" }, { Name: "RONI" }, { Name: "ALY" }], "foo");
+    const defaultArr = ManageStateFunctions.filterOrsort([{ name: "Avi" }, { name: "Moy" }, { name: "RONI" }, { name: "ALY" }], "SearchIn", "foo");
     expect(defaultArr).toBe(defaultArr);
 
-    const sortBySearchParams = ManageStateFunctions.SortArray([{ Name: "Avi" }, { Name: "Moy" }, { Name: "RONI" }, { Name: "ALY" }], "SearchIn", "a");
-    expect(sortBySearchParams).toStrictEqual([{ Name: "Avi" }, { Name: "ALY" }]);
+    const sortBySearchParams = ManageStateFunctions.filterOrsort([{ name: "Avi" }, { name: "Moy" }, { name: "RONI" }, { name: "ALY" }], "SearchIn", "a");
+    expect(sortBySearchParams).toStrictEqual([{ name: "Avi" }, { name: "ALY" }]);
 
 });
