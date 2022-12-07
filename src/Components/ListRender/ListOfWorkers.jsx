@@ -4,16 +4,16 @@ import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import ButtonBase from "@material-ui/core/ButtonBase";
 import DeleteIcon from "@material-ui/icons/Delete";
-import useStyles from "../Style/useStyles";
+import useStyles from "../../Style/useStyles";
 import PropTypes from "prop-types";
 import { useState } from "react";
 
-import manageStateFunctions from "../Utils/ManageStateFunctions";
-import FilterBySearch from "./FilterBySearch";
-import SortTheList from "./SortTheList";
+import manageStateFunctions from "../../Utils/ManageStateFunctions";
+import FilterBySearch from "../Sort by options/SortBySearch";
+import SortTheList from "../Sort by options/SortByNameAge";
 
 ListOfWorkers.propTypes = {
-  arrWorker: PropTypes.object,
+  arrWorker: PropTypes.array,
   saveArrWorker: PropTypes.func,
 };
 
@@ -102,12 +102,12 @@ export default function ListOfWorkers(props) {
         {filterBy.run === "default" && <RunOnAnArrAndRender />}
         {filterBy.run === "SearchIn" && (
           <RunOnAnArrAndRender
-            sortType={"SearchIn"}
+            sortType={filterBy.run}
             Search={filterBy.optional}
           />
         )}
-        {filterBy.run === "Name" && <RunOnAnArrAndRender sortType={"Name"} />}
-        {filterBy.run === "Age" && <RunOnAnArrAndRender sortType={"Age"} />}
+        {filterBy.run === "Name" && <RunOnAnArrAndRender sortType={filterBy.run} />}
+        {filterBy.run === "Age" && <RunOnAnArrAndRender sortType={filterBy.run} />}
       </>
     );
   }

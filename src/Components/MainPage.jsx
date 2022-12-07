@@ -1,6 +1,6 @@
-import Header from "./Header.jsx";
-import FormInput from "./FormInput.jsx";
-import ListOfWorkers from "./ListOfWorkers.jsx";
+import Header from "./StaticPages/Header.jsx";
+import FormInput from "./Input/AddEmployee.jsx";
+import ListOfWorkers from "./ListRender/ListOfWorkers.jsx";
 
 import { useState } from "react";
 
@@ -11,7 +11,7 @@ function Main() {
     setArrWorker(arr);
 
     
-    //I just Keep the data in session storage אo remember how arrWorker looks like..
+    //I just Keep the data in session storage to remember how arrWorker looks like..
     sessionStorage.setItem("tempArrUsers", JSON.stringify(arr));
   };
 

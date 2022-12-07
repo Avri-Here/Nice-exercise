@@ -12,8 +12,8 @@ import PropTypes from "prop-types";
 import Swal from "sweetalert2";
 import { useState } from "react";
 
-import manageStateFunctions from "../Utils/ManageStateFunctions";
-import getRandomPicture from "../Utils/GetRandomPicture";
+import manageStateFunctions from "../../Utils/ManageStateFunctions";
+import getRandomPicture from "../../Utils/GetRandomPicture";
 
 const useStyles = makeStyles((theme) => ({
   margin: {
@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
 
 // propTypes .. 
 FormInput.propTypes = {
-  arrWorker: PropTypes.object,
+  arrWorker: PropTypes.array,
   saveArrWorker: PropTypes.func,
 };
 

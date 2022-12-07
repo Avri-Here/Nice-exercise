@@ -4,7 +4,7 @@
 export default {
 
     checkForDuplicates: (arrWorker, inputs) => {
-        return -1 == arrWorker.findIndex((item) => {
+        return -1 === arrWorker.findIndex((item) => {
             return item.Id === inputs.Id;
         });
     },
