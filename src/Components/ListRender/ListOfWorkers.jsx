@@ -8,21 +8,20 @@ import useStyles from "../../Style/useStyles";
 import PropTypes from "prop-types";
 import { useState } from "react";
 
-import manageStateFunctions from "../../Utils/ManageStateFunctions";
-import FilterBySearch from "../Sort by options/SortBySearch";
-import SortTheList from "../Sort by options/SortByNameAge";
+import FilterBySearch from "../SortOrFilter/FilterBySearch";
+import SortTheList from "../SortOrFilter/SortByNameAge";
 
-ListOfWorkers.propTypes = {
-  arrWorker: PropTypes.array,
-  saveArrWorker: PropTypes.func,
-};
+import manageStateFunctions from "../../Utils/ManageStateFunctions";
 
 export default function ListOfWorkers(props) {
   const classes = useStyles();
 
-  const [filterBy, setFilterBy] = useState({ run: "default", optional: "" });
+  const [filterOrsort, setFilterOrsort] = useState({
+    type: "default",
+    by: "default",
+  });
 
-  function removeFromArr(index) {
+  const removeFromArr = (index) => {
     // To delete without holes from an array I can use a "Array.prototype.splice()" , in case the array is a State it is better to use a filter prototype ..
     const newArrAfterFilter = manageStateFunctions.newArrAfterRemove(
       props.arrWorker,
@@ -31,89 +30,87 @@ export default function ListOfWorkers(props) {
 
     // Update the array after deleting an item ..
     props.saveArrWorker(newArrAfterFilter);
-  }
+  };
 
-  function RunOnAnArrAndRender(sortType) {
-    
-    // When sorting by name or age or when searching for an employee, the original array does not change, only the display .. 
+  function RenderListOfEmployees(params) {
+    const { type, by } = params.filterOrsort;
+    // When sorting by name or age or when searching for an employee, the original array does not change, only the display ..
     return manageStateFunctions
-      .SortArray(props.arrWorker, sortType.sortType, sortType.Search)
-      .map((item, index) => {
-        return (
-          <div key={item.photoUser}>
-            <br />
-            <Paper key={item.photoUser} className={classes.paper}>
-              <Grid container spacing={2}>
-                <Grid item>
-                  <ButtonBase className={classes.image}>
-                    <img
-                      className={classes.img}
-                      alt="complex"
-                      src={item.photoUser}
-                    />
-                  </ButtonBase>
-                </Grid>
-                <Grid item xs={12} sm container>
-                  <Grid item xs container direction="column" spacing={2}>
-                    <Grid item xs>
-                      <Typography gutterBottom variant="subtitle1">
-                        {"Name : " + item.Name}
-                      </Typography>
-                      <Typography variant="body2" gutterBottom>
-                        {"Age : " + item.Age}
-                      </Typography>
-                    </Grid>
-                    <Grid
-                      item
-                      onClick={() => {
-                        removeFromArr(index);
-                      }}
-                    >
-                      <Typography variant="body2" style={{ cursor: "pointer" }}>
-                        <DeleteIcon />
-                      </Typography>
-                    </Grid>
+      .filterOrsort(props.arrWorker, type, by)
+      .map((item, index) => (
+        <div key={item.photoUser}>
+          <br />
+          <Paper key={item.photoUser} className={classes.paper}>
+            <Grid container spacing={2}>
+              <Grid item>
+                <ButtonBase className={classes.image}>
+                  <img
+                    className={classes.img}
+                    alt="complex"
+                    src={item.photoUser}
+                  />
+                </ButtonBase>
+              </Grid>
+              <Grid item xs={12} sm container>
+                <Grid item xs container direction="column" spacing={2}>
+                  <Grid item xs>
+                    <Typography gutterBottom variant="subtitle1">
+                      {"Name : " + item.name}
+                    </Typography>
+                    <Typography variant="body2" gutterBottom>
+                      {"Age : " + item.age}
+                    </Typography>
                   </Grid>
-                  <Grid item>
-                    <Typography variant="subtitle1">
-                      Worker ID: {item.Id}
+                  <Grid
+                    item
+                    onClick={() => {
+                      removeFromArr(index);
+                    }}
+                  >
+                    <Typography variant="body2" style={{ cursor: "pointer" }}>
+                      <DeleteIcon />
                     </Typography>
                   </Grid>
                 </Grid>
+                <Grid item>
+                  <Typography variant="subtitle1">
+                    Worker ID: {item.id}
+                  </Typography>
+                </Grid>
               </Grid>
-            </Paper>
-          </div>
-        );
-      });
+            </Grid>
+          </Paper>
+        </div>
+      ));
   }
 
-  // return Array.map ..
   if (props.arrWorker.length > 0) {
     return (
       <>
         <div className="option">
-          <FilterBySearch setFilterBy={setFilterBy} />
+          <FilterBySearch setFilterOrsort={setFilterOrsort} />
         </div>
         <br />
-
         <div className="option">
-          <SortTheList setFilterBy={setFilterBy} />
+          <SortTheList setFilterOrsort={setFilterOrsort} />
         </div>
 
-        {filterBy.run === "default" && <RunOnAnArrAndRender />}
-        {filterBy.run === "SearchIn" && (
-          <RunOnAnArrAndRender
-            sortType={filterBy.run}
-            Search={filterBy.optional}
-          />
-        )}
-        {filterBy.run === "Name" && (
-          <RunOnAnArrAndRender sortType={filterBy.run} />
-        )}
-        {filterBy.run === "Age" && (
-          <RunOnAnArrAndRender sortType={filterBy.run} />
-        )}
+        <h6 style={{ textAlign: "center" }}>
+          {filterOrsort.type !== "SearchIn" &&
+            "List sorted by : " + filterOrsort.by}
+        </h6>
+
+        <RenderListOfEmployees
+          filterOrsort={filterOrsort}
+          arrWorker={props.arrWorker}
+        />
       </>
     );
   }
+  return null;
 }
+
+ListOfWorkers.propTypes = {
+  arrWorker: PropTypes.array,
+  saveArrWorker: PropTypes.func,
+};

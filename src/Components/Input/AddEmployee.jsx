@@ -21,14 +21,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-
-// propTypes .. 
-FormInput.propTypes = {
-  arrWorker: PropTypes.array,
-  saveArrWorker: PropTypes.func,
-};
-
-export default function FormInput(props) {
+export default function AddEmployee(props) {
   const classes = useStyles();
 
   // Object for fields : name, age, ID ..
@@ -79,9 +72,9 @@ export default function FormInput(props) {
             <Grid item>
               <TextField
                 id="input-with-icon-grid"
-                label="Name"
-                name="Name"
-                value={inputs.Name || ""}
+                label="name"
+                name="name"
+                value={inputs.name || ""}
                 onChange={handleChange}
                 required
               />
@@ -96,11 +89,11 @@ export default function FormInput(props) {
             <Grid item>
               <TextField
                 id="input-with-icon-grid"
-                label="Age"
-                name="Age"
+                label="age"
+                name="age"
                 type="number"
                 InputProps={{ inputProps: { min: 18, max: 80 } }}
-                value={inputs.Age || ""}
+                value={inputs.age || ""}
                 onChange={handleChange}
                 required
               />
@@ -115,9 +108,9 @@ export default function FormInput(props) {
             <Grid item>
               <TextField
                 id="input-with-icon-grid"
-                label="Id"
-                name="Id"
-                value={inputs.Id || ""}
+                label="id"
+                name="id"
+                value={inputs.id || ""}
                 onChange={handleChange}
                 required
               />
@@ -140,4 +133,9 @@ export default function FormInput(props) {
   );
 }
 
-// propTypes React..
+// propTypes ..
+
+AddEmployee.propTypes = {
+  arrWorker: PropTypes.array,
+  saveArrWorker: PropTypes.func,
+};

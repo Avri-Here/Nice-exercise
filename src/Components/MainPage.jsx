@@ -1,24 +1,29 @@
 import Header from "./StaticPages/Header.jsx";
-import FormInput from "./Input/AddEmployee.jsx";
+import AddEmployee from "./Input/AddEmployee.jsx";
 import ListOfWorkers from "./ListRender/ListOfWorkers.jsx";
 
 import { useState } from "react";
 
 function Main() {
-  const [arrWorker, setArrWorker] = useState([]);
+  const [arrWorker, setArrWorker] = useState(() => {
 
-  const saveArrWorker = (arr) => {
+    // Check if arrWorker already exists in session storage and protect its deletion in case of refresh page.. 
+    return sessionStorage.getItem("tempArrUsers")
+      ? JSON.parse(sessionStorage.getItem("tempArrUsers"))
+      : [];
+  });
+
+  const saveArrWorker = arr => {
     setArrWorker(arr);
 
-    
-    //I just Keep the data in session storage to remember how arrWorker looks like..
+    //Keep the data in session storage ..
     sessionStorage.setItem("tempArrUsers", JSON.stringify(arr));
   };
 
   return (
     <>
       <Header />
-      <FormInput saveArrWorker={saveArrWorker} arrWorker={arrWorker} />
+      <AddEmployee saveArrWorker={saveArrWorker} arrWorker={arrWorker} />
       <br />
       <ListOfWorkers saveArrWorker={saveArrWorker} arrWorker={arrWorker} />
     </>

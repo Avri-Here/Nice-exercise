@@ -3,7 +3,7 @@ import Button from "@material-ui/core/Button";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 
-export default function SortTheList(props) {
+export default function SortTheList({ setFilterOrsort }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   // Methods of material-ui ..
@@ -36,15 +36,7 @@ export default function SortTheList(props) {
       >
         <MenuItem
           onClick={() => {
-            props.setFilterBy({ run: "Name" });
-            handleClose();
-          }}
-        >
-          Sort by name A-Z ..
-        </MenuItem>
-        <MenuItem
-          onClick={() => {
-            props.setFilterBy({ run: "Age" });
+            setFilterOrsort({ type: "sort", by: "age" });
             handleClose();
           }}
         >
@@ -52,7 +44,16 @@ export default function SortTheList(props) {
         </MenuItem>
         <MenuItem
           onClick={() => {
-            props.setFilterBy({ run: "default" });
+            setFilterOrsort({ type: "sort", by: "name" });
+            handleClose();
+          }}
+        >
+          Sort by name ..
+        </MenuItem>
+
+        <MenuItem
+          onClick={() => {
+            setFilterOrsort({ type: "default", by: "default" });
             handleClose();
           }}
         >

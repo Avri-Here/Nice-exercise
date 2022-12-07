@@ -2,7 +2,7 @@
 
 // I return a random image link ..
 
-export default (() => {
+const GetRandomPicture = (() => {
     return new Promise(async (resolve) => {
         try {
             const photoUser = await fetch("https://picsum.photos/200");
@@ -13,3 +13,6 @@ export default (() => {
         }
     })
 })
+
+
+export default GetRandomPicture;
