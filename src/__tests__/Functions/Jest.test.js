@@ -6,6 +6,8 @@ test('getRandomPicture', async () => {
     expect.stringContaining(data);
 });
 
+
+
 test('checkForDuplicates', () => {
     const test1 = ManageStateFunctions.checkForDuplicates([{ Id: 1 }, { Id: 2 }, { Id: 3 }], { Id: 6 });
     expect(test1).toBe(true);
@@ -22,25 +24,19 @@ test('newArrAfterRemove', () => {
 
 });
 
-test('filterBySearchParams', () => {
-    const test1 = ManageStateFunctions.filterBySearchParams([{ Name: "Avi" }, { Name: "Moy" }, { Name: "RONI" }, { Name: "ALY" }], "A");
-    expect(test1).toStrictEqual([{ Name: "Avi" }, { Name: "ALY" }]);
-    const test2 = ManageStateFunctions.filterBySearchParams([{ Name: "Avi" }, { Name: "Moy" }, { Name: "RONI" }, { Name: "ALY" }], "m");
-    expect(test2).toStrictEqual([{ Name: "Moy" }]);
-    const test3 = ManageStateFunctions.filterBySearchParams([{ Name: "Avi" }, { Name: "Moy" }, { Name: "RONI" }, { Name: "ALY" }], "T");
-    expect(test3).toBe(test3);
-
-});
 
 
 test('SortArray', () => {
-    const test1 = ManageStateFunctions.SortArray([{ Name: "Avi" }, { Name: "Moy" }, { Name: "RONI" }, { Name: "ALY" }], "Name");
-    expect(test1).toStrictEqual([{ Name: "ALY" }, { Name: "Avi" }, { Name: "Moy" }, { Name: "RONI" }]);
+    const sortByName = ManageStateFunctions.SortArray([{ Name: "Avi" }, { Name: "Moy" }, { Name: "RONI" }, { Name: "ALY" }], "Name");
+    expect(sortByName).toStrictEqual([{ Name: "ALY" }, { Name: "Avi" }, { Name: "Moy" }, { Name: "RONI" }]);
 
-    const test2 = ManageStateFunctions.SortArray([{ Age: 4 }, { Age: 8 }, { Age: 9 }, { Age: 1 }], "Age");
-    expect(test2).toStrictEqual([{ Age: 9 }, { Age: 8 }, { Age: 4 }, { Age: 1 }]);
+    const sortByAge = ManageStateFunctions.SortArray([{ Age: 4 }, { Age: 8 }, { Age: 9 }, { Age: 1 }], "Age");
+    expect(sortByAge).toStrictEqual([{ Age: 9 }, { Age: 8 }, { Age: 4 }, { Age: 1 }]);
 
-    const test3 = ManageStateFunctions.SortArray([{ Name: "Avi" }, { Name: "Moy" }, { Name: "RONI" }, { Name: "ALY" }], "foo");
-    expect(test3).toBe(test3);
+    const defaultArr = ManageStateFunctions.SortArray([{ Name: "Avi" }, { Name: "Moy" }, { Name: "RONI" }, { Name: "ALY" }], "foo");
+    expect(defaultArr).toBe(defaultArr);
+
+    const sortBySearchParams = ManageStateFunctions.SortArray([{ Name: "Avi" }, { Name: "Moy" }, { Name: "RONI" }, { Name: "ALY" }], "SearchIn", "a");
+    expect(sortBySearchParams).toStrictEqual([{ Name: "Avi" }, { Name: "ALY" }]);
 
 });
