@@ -17,7 +17,6 @@ ListOfWorkers.propTypes = {
   saveArrWorker: PropTypes.func,
 };
 
-
 export default function ListOfWorkers(props) {
   const classes = useStyles();
 
@@ -35,6 +34,8 @@ export default function ListOfWorkers(props) {
   }
 
   function RunOnAnArrAndRender(sortType) {
+    
+    // When sorting by name or age or when searching for an employee, the original array does not change, only the display .. 
     return manageStateFunctions
       .SortArray(props.arrWorker, sortType.sortType, sortType.Search)
       .map((item, index) => {
@@ -106,8 +107,12 @@ export default function ListOfWorkers(props) {
             Search={filterBy.optional}
           />
         )}
-        {filterBy.run === "Name" && <RunOnAnArrAndRender sortType={filterBy.run} />}
-        {filterBy.run === "Age" && <RunOnAnArrAndRender sortType={filterBy.run} />}
+        {filterBy.run === "Name" && (
+          <RunOnAnArrAndRender sortType={filterBy.run} />
+        )}
+        {filterBy.run === "Age" && (
+          <RunOnAnArrAndRender sortType={filterBy.run} />
+        )}
       </>
     );
   }

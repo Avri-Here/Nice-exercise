@@ -1,7 +1,11 @@
 
+
+
 // The following methods are for state management ..
 
-export default {
+
+
+const ManageStateFunctions = {
 
     checkForDuplicates: (arrWorker, inputs) => {
         return -1 === arrWorker.findIndex((item) => {
@@ -50,3 +54,6 @@ export default {
 
     }
 }
+
+
+export default ManageStateFunctions;
