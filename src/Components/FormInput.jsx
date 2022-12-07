@@ -8,6 +8,7 @@ import ChildFriendlyIcon from "@material-ui/icons/ChildFriendly";
 import AdbIcon from "@material-ui/icons/Adb";
 import Button from "@material-ui/core/Button";
 import SaveIcon from "@material-ui/icons/Save";
+import PropTypes from "prop-types";
 import Swal from "sweetalert2";
 import { useState } from "react";
 
@@ -19,6 +20,13 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(2),
   },
 }));
+
+
+// propTypes .. 
+FormInput.propTypes = {
+  arrWorker: PropTypes.object,
+  saveArrWorker: PropTypes.func,
+};
 
 export default function FormInput(props) {
   const classes = useStyles();
@@ -52,8 +60,7 @@ export default function FormInput(props) {
         text: "Something went wrong wite ID input !",
         footer: "<h6>Duplication ID .. </h6>",
       });
-    }
-     else {
+    } else {
       // Update the Array workers ..
       props.saveArrWorker([...props.arrWorker, inputs]);
     }

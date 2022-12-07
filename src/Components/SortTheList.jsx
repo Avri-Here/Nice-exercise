@@ -56,7 +56,7 @@ export default function SortTheList(props) {
             handleClose();
           }}
         >
-          filter By default ..
+          Sort By default ..
         </MenuItem>
       </Menu>
     </div>

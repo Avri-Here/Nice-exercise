@@ -5,18 +5,23 @@ import Typography from "@material-ui/core/Typography";
 import ButtonBase from "@material-ui/core/ButtonBase";
 import DeleteIcon from "@material-ui/icons/Delete";
 import useStyles from "../Style/useStyles";
+import PropTypes from "prop-types";
 import { useState } from "react";
 
 import manageStateFunctions from "../Utils/ManageStateFunctions";
 import FilterBySearch from "./FilterBySearch";
 import SortTheList from "./SortTheList";
 
+ListOfWorkers.propTypes = {
+  arrWorker: PropTypes.object,
+  saveArrWorker: PropTypes.func,
+};
+
+
 export default function ListOfWorkers(props) {
   const classes = useStyles();
 
   const [filterBy, setFilterBy] = useState({ run: "default", optional: "" });
-
-  const [counterResultsSearch, setCounterResultsSearch] = useState(0);
 
   function removeFromArr(index) {
     // To delete without holes from an array I can use a "Array.prototype.splice()" , in case the array is a State it is better to use a filter prototype ..
@@ -32,8 +37,7 @@ export default function ListOfWorkers(props) {
   function RunOnAnArrAndRender(sortType) {
     return manageStateFunctions
       .SortArray(props.arrWorker, sortType.sortType, sortType.Search)
-      .map((item, index, arr) => {
-        // sortType.sortType === "SearchIn" && setCounterResultsSearch(arr.length);
+      .map((item, index) => {
         return (
           <div key={item.photoUser}>
             <br />
