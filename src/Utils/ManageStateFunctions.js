@@ -9,7 +9,7 @@ const ManageStateFunctions = {
 
     checkForDuplicates: (arrWorker, inputs) => {
         return -1 === arrWorker.findIndex((item) => {
-            return item.id === inputs.Id;
+            return item.id === inputs.id;
         });
     },
 
