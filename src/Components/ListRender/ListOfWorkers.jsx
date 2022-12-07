@@ -13,7 +13,7 @@ import SortTheList from "../SortOrFilter/SortByNameAge";
 
 import manageStateFunctions from "../../Utils/ManageStateFunctions";
 
-export default function ListOfWorkers(props) {
+const ListOfWorkers = (props) => {
   const classes = useStyles();
 
   const [filterOrsort, setFilterOrsort] = useState({
@@ -110,7 +110,11 @@ export default function ListOfWorkers(props) {
   return null;
 }
 
+
 ListOfWorkers.propTypes = {
   arrWorker: PropTypes.array,
   saveArrWorker: PropTypes.func,
 };
+
+
+export default ListOfWorkers;

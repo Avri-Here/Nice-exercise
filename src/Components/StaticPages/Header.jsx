@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function Header() {
+ const Header = () => {
   return (
     <div id="Header" className="w3-container">
       <br />
@@ -11,3 +11,6 @@ export default function Header() {
     </div>
   );
 }
+
+
+export default Header

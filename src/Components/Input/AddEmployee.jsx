@@ -21,20 +21,20 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function AddEmployee(props) {
+const AddEmployee = (props) => {
   const classes = useStyles();
 
   // Object for fields : name, age, ID ..
   const [inputs, setInputs] = useState({});
 
   // Function for changing the input fields in State ..
-  function handleChange(event) {
+  const handleChange = (event) => {
     const name = event.target.name;
     const value = event.target.value;
     setInputs((values) => ({ ...values, [name]: value }));
-  }
+  };
 
-  async function addToWorkerList(event) {
+  const addToWorkerList = async (event) => {
     event.preventDefault();
 
     // Get a random picture for worker and add the url into the object State ..
@@ -53,14 +53,14 @@ export default function AddEmployee(props) {
         text: "Something went wrong wite ID input !",
         footer: "<h6>Duplication ID .. </h6>",
       });
-    } else {
-      // Update the Array workers ..
-      props.saveArrWorker([...props.arrWorker, inputs]);
+      return;
     }
+    // Update the Array workers ..
+    props.saveArrWorker([...props.arrWorker, inputs]);
 
     // Reset the input fields ..
     setInputs({});
-  }
+  };
   return (
     <>
       <form className="form" onSubmit={addToWorkerList} data-testid="form">
@@ -131,7 +131,7 @@ export default function AddEmployee(props) {
       </form>
     </>
   );
-}
+};
 
 // propTypes ..
 
@@ -139,3 +139,6 @@ AddEmployee.propTypes = {
   arrWorker: PropTypes.array,
   saveArrWorker: PropTypes.func,
 };
+
+
+export default AddEmployee;

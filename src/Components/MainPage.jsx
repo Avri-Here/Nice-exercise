@@ -4,16 +4,17 @@ import ListOfWorkers from "./ListRender/ListOfWorkers.jsx";
 
 import { useState } from "react";
 
-function Main() {
-  const [arrWorker, setArrWorker] = useState(() => {
+const Main = () => {
+  
+  const [arrWorker, setArrWorker] = useState(
+    // Check if arrWorker already exists in session storage and protect its deletion in case of refresh page..
 
-    // Check if arrWorker already exists in session storage and protect its deletion in case of refresh page.. 
-    return sessionStorage.getItem("tempArrUsers")
+    sessionStorage.getItem("tempArrUsers")
       ? JSON.parse(sessionStorage.getItem("tempArrUsers"))
-      : [];
-  });
+      : []
+  );
 
-  const saveArrWorker = arr => {
+  const saveArrWorker = (arr) => {
     setArrWorker(arr);
 
     //Keep the data in session storage ..
@@ -28,6 +29,6 @@ function Main() {
       <ListOfWorkers saveArrWorker={saveArrWorker} arrWorker={arrWorker} />
     </>
   );
-}
+};
 
 export default Main;

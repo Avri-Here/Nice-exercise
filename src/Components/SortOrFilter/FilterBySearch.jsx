@@ -1,4 +1,6 @@
-export default function FilterBySearch({ setFilterOrsort }) {
+import PropTypes from "prop-types";
+
+const FilterBySearch = ({ setFilterOrsort }) => {
   return (
     <>
       <label style={{ textAlign: "center", display: "grid" }}>
@@ -15,4 +17,10 @@ export default function FilterBySearch({ setFilterOrsort }) {
       <br />
     </>
   );
-}
+};
+
+FilterBySearch.propTypes = {
+  setFilterOrsort: PropTypes.func
+};
+
+export default FilterBySearch;
